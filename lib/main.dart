@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Screen/login_page.dart';
-import 'Screen/main_page.dart';
+import 'Screen/main_nevigation_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/main',
+      initialRoute: '/login',
       routes: {
         '/login': (context) => LoginPage(),
         '/main': (context) => MainPage(),

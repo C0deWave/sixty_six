@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Widget/sign_in_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'main_nevigation_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -68,6 +69,9 @@ class LoginPage extends StatelessWidget {
             child: googleButton(
               function: () {
                 print('버튼클릭');
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MainPage()));
               },
             ),
           )
