@@ -30,9 +30,14 @@ class _MainPeedPageState extends State<MainPeedPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  PeedItemWidget(),
-                  PeedItemWidget(),
-                  PeedItemWidget(),
+                  PeedItemWidget(
+                    imageurl:
+                        'https://img.insight.co.kr/static/2020/08/14/700/9x958897t7a9ktzei33h.jpg',
+                    userName: '훈이',
+                    content: '나는 오늘도 게임을 한다.',
+                    isClickThumsUp: false,
+                    likeNum: 100,
+                  ),
                 ],
               ),
             ),
