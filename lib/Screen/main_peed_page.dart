@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sixty_six/constant.dart';
+import '../Widget/peed_item_widget.dart';
 
 class MainPeedPage extends StatefulWidget {
   const MainPeedPage({Key? key}) : super(key: key);
@@ -29,14 +30,9 @@ class _MainPeedPageState extends State<MainPeedPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const Text(
-                    'data\nfdfdn\ndsdasadas\nfdsfdsf\nfdsfsdfsf\nfdsfs\nfdsfdsfsdf\nfdsfsdf',
-                    style: TextStyle(fontSize: 70),
-                  ),
-                  Text(
-                    'data',
-                    style: TextStyle(fontSize: 70),
-                  ),
+                  PeedItemWidget(),
+                  PeedItemWidget(),
+                  PeedItemWidget(),
                 ],
               ),
             ),

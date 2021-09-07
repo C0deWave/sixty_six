@@ -73,6 +73,7 @@ class _ExistWriteDataState extends State<ExistWriteData> {
                     onPressed: () async {
                       if (Platform.isIOS) {
                         // if (true) {
+                        //TODO: Alert 리팩토링 하기
                         showDialog<void>(
                           context: context,
                           barrierDismissible: false, // user must tap button!
@@ -132,7 +133,11 @@ class _ExistWriteDataState extends State<ExistWriteData> {
                 maxLines: null,
               ),
             ),
-            TextButton(onPressed: () {}, child: Text('게시글 삭제')),
+            TextButton(
+                onPressed: () {
+                  //TODO: 게시글 삭제 구현
+                },
+                child: Text('게시글 삭제')),
           ],
         ),
       ),

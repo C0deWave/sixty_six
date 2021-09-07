@@ -32,7 +32,6 @@ class ImageAddWidget extends StatelessWidget {
               print(e);
             }
           }
-          //TODO: 이미지 + 버튼 추가
           updateImageList(imageList);
         },
         child: DottedBorder(
