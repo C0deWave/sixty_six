@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sixty_six/constant.dart';
 import '../Widget/peed_item_widget.dart';
 
+//네비게이션 1번 메인 피드페이지 입니다.
+
 class MainPeedPage extends StatefulWidget {
   const MainPeedPage({Key? key}) : super(key: key);
 

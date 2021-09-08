@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// 구글 로그인 버튼입니다.
+
 class googleButton extends StatelessWidget {
   googleButton({required this.function});
   final Function() function;
