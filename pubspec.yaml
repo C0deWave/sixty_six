@@ -32,4 +32,5 @@ flutter:
 
   assets:
     - assets/google_logo.png
+    - assets/ball.png
   #   - images/a_dot_ham.jpeg
