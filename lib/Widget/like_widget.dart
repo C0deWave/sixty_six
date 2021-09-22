@@ -35,7 +35,7 @@ class _LikeWidgetState extends State<LikeWidget> {
           },
           child: Icon(
             isClick ? Icons.run_circle : Icons.run_circle_outlined,
-            size: 24,
+            size: 30,
           ),
         ),
         SizedBox(
@@ -43,7 +43,7 @@ class _LikeWidgetState extends State<LikeWidget> {
         ),
         Text(
           likeNum.toString(),
-          style: TextStyle(fontSize: 17),
+          style: TextStyle(fontSize: 20),
         ),
       ],
     );

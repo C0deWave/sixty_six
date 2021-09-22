@@ -19,7 +19,8 @@ class ImageAddWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () async {
           List<Widget> imageList = [];
-          pickedFileList = (await picker.pickMultiImage())!;
+          pickedFileList = (await picker.pickMultiImage(
+              maxHeight: double.infinity, maxWidth: double.infinity))!;
           imageList = [];
           for (var imageData in pickedFileList) {
             try {
