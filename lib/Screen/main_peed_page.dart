@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sixty_six/constant.dart';
 import '../Widget/peed_item_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../Class/http_to_json.dart';
 
 //네비게이션 1번 메인 피드페이지 입니다.
 
@@ -16,6 +17,9 @@ class _MainPeedPageState extends State<MainPeedPage> {
   RefreshController _refreshController = RefreshController();
   int loadingcount = 1;
   bool isEnableBottomIndicator = true;
+  //API JSON 테스트용
+  HttpToJson httpToJson = HttpToJson();
+
   var peedList = [
     PeedItemWidget(
       imageurl:
@@ -73,6 +77,8 @@ class _MainPeedPageState extends State<MainPeedPage> {
               enablePullDown: true,
               onRefresh: () async {
                 //TODO:새로고침 기능이다. 글 불러오기
+                //테스트용
+                httpToJson.testGetData('https://www.google.com');
                 await Future.delayed(const Duration(milliseconds: 2000));
                 print('Refresh호출');
                 setState(() {

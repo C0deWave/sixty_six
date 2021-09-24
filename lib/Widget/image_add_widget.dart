@@ -11,7 +11,7 @@ class ImageAddWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<XFile> pickedFileList = [];
+    List<XFile>? pickedFileList = [];
     final ImagePicker picker = ImagePicker();
 
     return Padding(
@@ -19,10 +19,13 @@ class ImageAddWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () async {
           List<Widget> imageList = [];
+          print('이미지 선택');
           pickedFileList = (await picker.pickMultiImage(
-              maxHeight: double.infinity, maxWidth: double.infinity))!;
+              maxHeight: double.infinity, maxWidth: double.infinity));
+          print('이미지 출력');
+          print(pickedFileList);
           imageList = [];
-          for (var imageData in pickedFileList) {
+          for (var imageData in pickedFileList ?? []) {
             try {
               imageList.add(Image.file(
                 File(imageData.path),

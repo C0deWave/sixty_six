@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 import '../Widget/image_add_widget.dart';
 
 class NotExistWriteData extends StatefulWidget {
@@ -24,6 +25,7 @@ class _NotExistWriteDataState extends State<NotExistWriteData> {
   Widget build(BuildContext context) {
     return Expanded(child: ImageAddWidget(
       updateImageList: (List<Widget> data) {
+        print('이미지 업데이트');
         updateImageList(data);
         changeWriteModeFunction();
       },
