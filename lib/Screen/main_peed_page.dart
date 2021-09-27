@@ -3,6 +3,7 @@ import 'package:sixty_six/constant.dart';
 import '../Widget/peed_item_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../Class/http_to_json.dart';
+import 'package:intl/intl.dart';
 
 //네비게이션 1번 메인 피드페이지 입니다.
 
@@ -17,8 +18,6 @@ class _MainPeedPageState extends State<MainPeedPage> {
   RefreshController _refreshController = RefreshController();
   int loadingcount = 1;
   bool isEnableBottomIndicator = true;
-  //API JSON 테스트용
-  HttpToJson httpToJson = HttpToJson();
 
   var peedList = [
     PeedItemWidget(
@@ -78,7 +77,13 @@ class _MainPeedPageState extends State<MainPeedPage> {
               onRefresh: () async {
                 //TODO:새로고침 기능이다. 글 불러오기
                 //테스트용
-                httpToJson.testGetData('https://www.google.com');
+                //httpToJson.makeGetRequest('');
+                // 시간 확인 테스트
+                DateTime now = DateTime.now();
+                String formattedDate =
+                    DateFormat('yyyy-MM-dd – kk:mm').format(now);
+                print(formattedDate);
+
                 await Future.delayed(const Duration(milliseconds: 2000));
                 print('Refresh호출');
                 setState(() {

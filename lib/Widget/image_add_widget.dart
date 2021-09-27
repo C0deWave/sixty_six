@@ -2,7 +2,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'dart:io';
+
+import 'package:sixty_six/Class/http_to_json.dart';
 
 class ImageAddWidget extends StatelessWidget {
   ImageAddWidget({required this.updateImageList});
@@ -24,6 +27,11 @@ class ImageAddWidget extends StatelessWidget {
               maxHeight: double.infinity, maxWidth: double.infinity));
           print('이미지 출력');
           print(pickedFileList);
+
+          //TODO : 이미지 업로드를 테스트 한다.
+          // HttpToJson httpToJson = HttpToJson();
+          // httpToJson.makeImagePostRequest("", pickedFileList ?? []);
+
           imageList = [];
           for (var imageData in pickedFileList ?? []) {
             try {
