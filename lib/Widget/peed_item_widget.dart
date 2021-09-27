@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sixty_six/constant.dart';
 import 'like_widget.dart';
+import '../Screen/letter_room.dart';
 
 class PeedItemWidget extends StatelessWidget {
   PeedItemWidget(
@@ -58,14 +59,17 @@ class PeedItemWidget extends StatelessWidget {
                 Expanded(child: Container()),
                 GestureDetector(
                   onTap: () {
-                    print('댓글 날리기');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LetterRoomPage()));
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.email,
                     size: 30,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 LikeWidget(

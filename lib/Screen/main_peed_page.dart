@@ -30,26 +30,6 @@ class _MainPeedPageState extends State<MainPeedPage> {
       userImage:
           'https://upload.wikimedia.org/wikipedia/ko/6/6d/%EC%98%A4%EB%A7%88%EC%9D%B4%EA%B1%B8_-_OH_MY_GIRL.jpg',
     ),
-    PeedItemWidget(
-      imageurl:
-          'https://img.insight.co.kr/static/2020/08/14/700/9x958897t7a9ktzei33h.jpg',
-      userName: '훈이',
-      content: '나는 오늘도 게임을 한다.',
-      isClickThumsUp: false,
-      likeNum: 100,
-      userImage:
-          'https://upload.wikimedia.org/wikipedia/ko/6/6d/%EC%98%A4%EB%A7%88%EC%9D%B4%EA%B1%B8_-_OH_MY_GIRL.jpg',
-    ),
-    PeedItemWidget(
-      imageurl:
-          'https://img.insight.co.kr/static/2020/08/14/700/9x958897t7a9ktzei33h.jpg',
-      userName: '훈이',
-      content: '나는 오늘도 게임을 한다.',
-      isClickThumsUp: false,
-      likeNum: 100,
-      userImage:
-          'https://upload.wikimedia.org/wikipedia/ko/6/6d/%EC%98%A4%EB%A7%88%EC%9D%B4%EA%B1%B8_-_OH_MY_GIRL.jpg',
-    ),
   ];
 
   @override

@@ -10,6 +10,13 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPage extends State<MainPage> {
+  final List _widgetOptions = [
+    MainPeedPage(),
+    MainMyWriitePage(),
+    MainVisitLogPage(),
+    MainAccountPage(),
+  ];
+
   int _selectedIndex = 0;
   Color color = Colors.lightGreen;
   @override
@@ -58,12 +65,5 @@ class _MainPage extends State<MainPage> {
       backgroundColor: Colors.indigo,
       icon: Icon(Icons.account_circle),
     ),
-  ];
-
-  List _widgetOptions = [
-    MainPeedPage(),
-    MainMyWriitePage(),
-    MainVisitLogPage(),
-    MainAccountPage(),
   ];
 }
