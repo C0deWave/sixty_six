@@ -1,11 +1,10 @@
 class JsonForm {
   //TODO : 나중에 나오는 api 양식 추가 및 uri 추가하기
-  // TODO : 전부 static로 변환하기
-  String PostJson() {
+  static String PostJson() {
     return '';
   }
 
-  String createWriteJson({
+  static String createWriteJson({
     required String content,
     required String name,
     required String imageUrl,
@@ -25,22 +24,23 @@ class JsonForm {
         '}';
   }
 
-  String updateWriteJson({required String content, required String imageUrl}) {
+  static String updateWriteJson(
+      {required String content, required String imageUrl}) {
     return '{'
         '"content": "$content",'
         '"image": "$imageUrl"'
         '}';
   }
 
-  String UserJson() {
+  static String UserJson() {
     return '';
   }
 
-  String ReportJson() {
+  static String ReportJson() {
     return '';
   }
 
-  String LetterJson() {
+  static String LetterJson() {
     return '';
   }
 }
