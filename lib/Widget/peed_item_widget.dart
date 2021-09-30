@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sixty_six/constant.dart';
 import 'like_widget.dart';
-import '../Screen/letter_room.dart';
+import '../Screen/letter_page.dart';
 
 class PeedItemWidget extends StatelessWidget {
   PeedItemWidget(
@@ -59,10 +59,23 @@ class PeedItemWidget extends StatelessWidget {
                 Expanded(child: Container()),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LetterRoomPage()));
+                    // 채팅방 생성및 추가하기
+                    showModalBottomSheet(
+                        isScrollControlled: true,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20.0))),
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        context: context,
+                        builder: (context) => Container(
+                            height: MediaQuery.of(context).size.height - 20,
+                            padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).viewInsets.bottom,
+                            ),
+                            child: LetterPage(
+                              imageUri: imageurl,
+                              content: content,
+                            )));
                   },
                   child: const Icon(
                     Icons.email,
