@@ -69,12 +69,10 @@ class PeedItemWidget extends StatelessWidget {
                         context: context,
                         builder: (context) => Container(
                             height: MediaQuery.of(context).size.height - 20,
-                            padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom,
-                            ),
                             child: LetterPage(
                               imageUri: imageurl,
                               content: content,
+                              userId: userName,
                             )));
                   },
                   child: const Icon(

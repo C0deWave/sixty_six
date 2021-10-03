@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sixty_six/constant.dart';
 import '../Widget/peed_item_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../Class/http_to_json.dart';
 import 'package:intl/intl.dart';
 
 //네비게이션 1번 메인 피드페이지 입니다.
@@ -24,7 +23,7 @@ class _MainPeedPageState extends State<MainPeedPage> {
       imageurl:
           'https://img.insight.co.kr/static/2020/08/14/700/9x958897t7a9ktzei33h.jpg',
       userName: '훈이',
-      content: '나는 오늘도 게임을 한다.',
+      content: '나는 오늘도 게임을 한다.\naaaa\nddddd\nffff\nggggg\nhhhh\njjjj',
       isClickThumsUp: false,
       likeNum: 100,
       userImage:

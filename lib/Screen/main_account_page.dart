@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixty_six/Widget/edit_profile.dart';
 import 'package:sixty_six/constant.dart';
 
 class MainAccountPage extends StatelessWidget {
@@ -87,7 +88,19 @@ class MainAccountPage extends StatelessWidget {
                   // 프로필 편집
                   TextButton(
                     onPressed: () {
-                      //TODO: 프로필 편집 페이지로 이동합니다.
+                      showModalBottomSheet(
+                          isScrollControlled: true,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20.0))),
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          context: context,
+                          builder: (context) => Container(
+                              height: MediaQuery.of(context).size.height - 40,
+                              child: EditUserProfile(
+                                userImageUrl: "",
+                                intro: "",
+                              )));
                     },
                     child: Text('프로필 편집'),
                   ),
