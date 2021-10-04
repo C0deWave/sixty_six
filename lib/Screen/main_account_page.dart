@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sixty_six/Class/data_shared_preference.dart';
+import 'package:sixty_six/Screen/login_page.dart';
 import 'package:sixty_six/Widget/edit_profile.dart';
 import 'package:sixty_six/constant.dart';
 
@@ -131,6 +133,18 @@ class MainAccountPage extends StatelessWidget {
                             child: gridImageList[index],
                           );
                         }),
+                  ),
+
+                  // 프로필 편집
+                  TextButton(
+                    onPressed: () {
+                      SharedPreferenceData.setUserData("userToken", "");
+                      Navigator.pop(context);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                      print("로그아웃 구현");
+                    },
+                    child: Text('로그아웃'),
                   ),
                 ],
               ),

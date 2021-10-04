@@ -1,30 +1,27 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:sixty_six/Class/data_shared_preference.dart';
+import 'package:sixty_six/Class/oauth_login.dart';
 import '../Widget/sign_in_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter_web_auth/flutter_web_auth.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors
-  const LoginPage();
+import 'main_nevigation_page.dart';
+
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  OauthLogin oauthLogin = OauthLogin();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkLogin();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Future<String> getUserData() async {
-      final prefs = await SharedPreferences.getInstance();
-      final counter = prefs.getString('userToken') ?? "";
-      return counter.toString();
-    }
-
-    void setUserData(String userToken) async {
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString('userToken', userToken);
-      print('저장완료');
-    }
-
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,54 +82,26 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: googleButton(
               function: () async {
-                print('버튼클릭');
-                print(await getUserData());
-// App specific variables
-                final googleClientId =
-                    '625204130102-cu51pa6i9pb55dqsuefqutcf2l9b3a0k.apps.googleusercontent.com';
-                final callbackUrlScheme =
-                    'com.googleusercontent.apps.625204130102-cu51pa6i9pb55dqsuefqutcf2l9b3a0k';
-
-// Construct the url
-                final url =
-                    Uri.https('accounts.google.com', '/o/oauth2/v2/auth', {
-                  'response_type': 'code',
-                  'client_id': googleClientId,
-                  'redirect_uri': '$callbackUrlScheme:/',
-                  'scope': 'email',
-                });
-
-// Present the dialog to the user
-                final result = await FlutterWebAuth.authenticate(
-                    url: url.toString(), callbackUrlScheme: callbackUrlScheme);
-
-// Extract code from resulting url
-                final code = Uri.parse(result).queryParameters['code'];
-
-// Use this code to get an access token
-                final response = await http.post(
-                    Uri.parse('https://www.googleapis.com/oauth2/v4/token'),
-                    body: {
-                      'client_id': googleClientId,
-                      'redirect_uri': '$callbackUrlScheme:/',
-                      'grant_type': 'authorization_code',
-                      'code': code,
-                    });
-
-// Get the access token from the response
-//                 final accessToken =
-//                     jsonDecode(response.body)['access_token'] as String;
-                final accessToken = response.body;
-                setUserData(response.body);
-                print(accessToken);
-                // Navigator.pop(context);
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => MainPage()));
+                print('구글 버튼클릭');
+                var data = await oauthLogin.googleLogin();
+                SharedPreferenceData.setUserData("userToken", data);
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MainPage()));
               },
             ),
           )
         ],
       ),
     );
+  }
+
+  void checkLogin() async {
+    var _data = await SharedPreferenceData.getUserData(key: "userToken");
+    if (_data != "") {
+      Navigator.pop(context);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MainPage()));
+    }
   }
 }
