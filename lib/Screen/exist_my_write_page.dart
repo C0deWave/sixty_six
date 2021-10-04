@@ -21,7 +21,6 @@ class _ExistWriteDataState extends State<ExistWriteData> {
   _ExistWriteDataState({required this.showFab, required this.imageList});
   Function showFab;
   void deleteCurrentImage() {
-    print('a');
     setState(() {
       imageList.remove(imageList[currentPage]);
     });
@@ -54,9 +53,7 @@ class _ExistWriteDataState extends State<ExistWriteData> {
                 //TODO: 네트워크 이미지 가져오기 부분 개선
                 : Image.network(''),
           ),
-          const SizedBox(
-            height: 5,
-          ),
+          const SizedBox(height: 5),
           Row(
             children: [
               SizedBox(

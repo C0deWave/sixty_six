@@ -26,18 +26,14 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 200,
-          ),
+          SizedBox(height: 200),
           Center(
             child: Text(
               '66',
               style: TextStyle(fontSize: 100, fontWeight: FontWeight.w700),
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           Container(
             height: 30,
             child: Row(
@@ -64,9 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          SizedBox(
-            height: 90,
-          ),
+          SizedBox(height: 90),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Container(
@@ -75,9 +69,7 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.grey,
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
+          SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: googleButton(
@@ -85,9 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 print('구글 버튼클릭');
                 var data = await oauthLogin.googleLogin();
                 SharedPreferenceData.setUserData("userToken", data);
-                Navigator.pop(context);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MainPage()));
+                goMainPage();
               },
             ),
           )
@@ -98,10 +88,12 @@ class _LoginPageState extends State<LoginPage> {
 
   void checkLogin() async {
     var _data = await SharedPreferenceData.getUserData(key: "userToken");
-    if (_data != "") {
-      Navigator.pop(context);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MainPage()));
-    }
+    if (_data != "") goMainPage();
+  }
+
+  void goMainPage() {
+    Navigator.pop(context);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => MainPage()));
   }
 }

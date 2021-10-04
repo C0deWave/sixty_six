@@ -8,8 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(
-    /// Providers are above [MyApp] instead of inside it, so that tests
-    /// can use [MyApp] while mocking the providers
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserInfoProvider()),
@@ -25,7 +23,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String route = "/login";
   @override
   initState() {
     // TODO: implement initState
@@ -39,7 +36,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: route,
+      initialRoute: '/login',
       routes: {
         '/login': (context) => LoginPage(),
         '/main': (context) => MainPage(),

@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'data_shared_preference.dart';
 
 class OauthLogin {
+  // TODO :: 안드로이드 분기 체크하기
   Future googleLogin() async {
     print(await SharedPreferenceData.getUserData(key: "userToken"));
     final googleClientId =

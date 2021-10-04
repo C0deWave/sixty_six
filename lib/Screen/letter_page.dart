@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:sixty_six/Widget/input_text_widget.dart';
 import '../Widget/chat_bubble.dart';
 
 class LetterPage extends StatefulWidget {
@@ -14,34 +15,46 @@ class LetterPage extends StatefulWidget {
 }
 
 class _LetterPageState extends State<LetterPage> {
+  List<Widget> messageList = [
+    reciverViewWithUserImage(
+      senderName: "훈이",
+      senderImageUri:
+          "https://img.sbs.co.kr/newimg/news/20201102/201486580_1280.jpg",
+      child: const Text("상대가 보낸 첫번째 글입니다.."),
+    ),
+    reciverMessage(child: Text("상대가 보낸 두번째 글입니다..")),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> messageList = [
-      chatBubble.getSenderView(
-          context,
-          Text(
-            "보낸이 입니다.",
-            style: TextStyle(color: Colors.white),
-          )),
-      chatBubble.getReceiverView(
-          context,
-          Text(
-            "보낸이 입니다.",
-            style: TextStyle(color: Colors.black),
-          )),
-    ];
+    var singleChildScrollViewController = ScrollController();
+    void addMessage(String text) {
+      setState(() {
+        messageList.add(senderMessage(
+            child: Text(
+          text,
+          style: TextStyle(color: Colors.white),
+        )));
+      });
+      print(messageList.length);
+      singleChildScrollViewController.animateTo(
+          singleChildScrollViewController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.fastOutSlowIn);
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.userId),
+        title: Text("채팅방"),
         automaticallyImplyLeading: false,
       ),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(
+            Expanded(
               child: SingleChildScrollView(
+                controller: singleChildScrollViewController,
                 child: Column(
                   children: [
                     Row(
@@ -71,9 +84,7 @@ class _LetterPageState extends State<LetterPage> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 8,
-                    ),
+                    SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Container(
@@ -89,48 +100,11 @@ class _LetterPageState extends State<LetterPage> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(15.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(35.0),
-                        boxShadow: [
-                          BoxShadow(
-                              offset: Offset(0, 3),
-                              blurRadius: 5,
-                              color: Colors.grey)
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.attach_file,
-                                color: Colors.blueAccent),
-                            onPressed: () {},
-                          ),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: "",
-                                  hintStyle:
-                                      TextStyle(color: Colors.blueAccent),
-                                  border: InputBorder.none),
-                            ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.send, color: Colors.blueAccent),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            inputTextWidget(
+              messageList: messageList,
+              sendCallback: (String text) {
+                addMessage(text);
+              },
             ),
           ],
         ),
