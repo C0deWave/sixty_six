@@ -46,19 +46,35 @@ class OauthLogin {
 
     print('응답' + result);
 
-    final code = Uri.parse(result).queryParameters['code'];
+    final String codes = Uri.parse(result).queryParameters['code'] ?? "";
 
-    final response = await http
-        .post(Uri.parse('https://www.googleapis.com/oauth2/v4/token'), body: {
-      'client_id': iosGoogleClientId,
-      'redirect_uri': '$iosCallbackUrlScheme:/',
-      'grant_type': 'authorization_code',
-      'code': code,
-    });
+    print('code');
+    print(codes);
+
+    var response;
+    if (Platform.isIOS) {
+      response = await http
+          .post(Uri.parse('https://www.googleapis.com/oauth2/v4/token'), body: {
+        'client_id': iosGoogleClientId,
+        'redirect_uri': '$iosCallbackUrlScheme:/',
+        'grant_type': 'authorization_code',
+        'code': codes,
+      });
+    } else if (Platform.isAndroid) {
+      response = await http
+          .post(Uri.parse('https://www.googleapis.com/oauth2/v4/token'), body: {
+        'client_id': androidGoogleClientId,
+        'redirect_uri': '$androidCallbackUrlScheme://',
+        'grant_type': 'authorization_code',
+        'code': codes,
+      });
+    }
 
 // Get the access token from the response
 //                 final accessToken =
 //                     jsonDecode(response.body)['access_token'] as String;
+    print('response');
+    print(response.body);
     return response.body;
   }
 }
