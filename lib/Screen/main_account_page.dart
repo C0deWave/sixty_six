@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sixty_six/Class/data_shared_preference.dart';
+import 'package:sixty_six/Class/location_api.dart';
 import 'package:sixty_six/Screen/login_page.dart';
 import 'package:sixty_six/Widget/edit_profile.dart';
 import 'package:sixty_six/constant.dart';
@@ -88,8 +89,9 @@ class MainAccountPage extends StatelessWidget {
                   ),
 
                   // 프로필 편집
+                  //TODO : 프로필 편집 화면 구현하기
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       showModalBottomSheet(
                           isScrollControlled: true,
                           shape: RoundedRectangleBorder(

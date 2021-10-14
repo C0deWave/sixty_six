@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixty_six/Class/location_api.dart';
 import 'package:sixty_six/constant.dart';
 import '../Widget/peed_item_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -7,10 +8,18 @@ import 'package:intl/intl.dart';
 //네비게이션 1번 메인 피드페이지 입니다.
 
 class MainPeedPage extends StatefulWidget {
-  const MainPeedPage({Key? key}) : super(key: key);
+  MainPeedPage({Key? key}) : super(key: key) {
+    getAddress();
+  }
 
   @override
   State<MainPeedPage> createState() => _MainPeedPageState();
+
+  void getAddress() async {
+    LocationApi locationApi = LocationApi();
+    var locationdata = await locationApi.getAddressData();
+    print(locationdata);
+  }
 }
 
 class _MainPeedPageState extends State<MainPeedPage> {

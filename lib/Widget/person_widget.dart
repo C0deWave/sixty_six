@@ -32,7 +32,6 @@ class _PersonState extends State<Person> {
   // 화면전환시 객체가 더이상 움직이지 않게합니다.
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _isMove = false;
   }
