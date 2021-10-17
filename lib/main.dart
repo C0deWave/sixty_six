@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sixty_six/Class/data_shared_preference.dart';
 import 'package:sixty_six/Class/user_info_provider.dart';
 import 'Screen/login_page.dart';
 import 'Screen/main_nevigation_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(
@@ -31,6 +29,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    UserInfoProvider UserData =
+        Provider.of<UserInfoProvider>(context, listen: false);
     return MaterialApp(
       title: 'Sixty6',
       theme: ThemeData(
@@ -39,7 +39,9 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/login',
       routes: {
         '/login': (context) => LoginPage(),
-        '/main': (context) => MainPage(),
+        '/main': (context) => MainPage(
+              UserData: UserData,
+            ),
       },
       debugShowCheckedModeBanner: false,
     );

@@ -1,21 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sixty_six/Class/data_shared_preference.dart';
+import 'package:sixty_six/Class/http_to_json.dart';
+import 'package:sixty_six/Class/user_info_provider.dart';
 import 'main_peed_page.dart';
 import 'main_my_write_page.dart';
 import 'main_account_page.dart';
 import 'main_visit_log_page.dart';
 
 class MainPage extends StatefulWidget {
+  MainPage({required this.UserData});
+  final UserData;
   @override
-  _MainPage createState() => _MainPage();
+  _MainPage createState() => _MainPage(UserData: UserData);
 }
 
 class _MainPage extends State<MainPage> {
+  _MainPage({required this.UserData});
+  final UserData;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData(UserData);
+  }
+
   final List _widgetOptions = [
     MainPeedPage(),
     MainMyWriitePage(),
     MainVisitLogPage(),
     MainAccountPage(),
   ];
+
+  void getUserData(UserInfoProvider UserData) async {
+    Map<String, dynamic> userData = await HttpToJson.getData(
+        "http://ec2-3-37-132-137.ap-northeast-2.compute.amazonaws.com:8080/sixtysix/user/search/1");
+    print(userData['id']);
+    SharedPreferenceData.setUserData("userId", userData['id'].toString());
+
+    // Provider에 데이터를 저장합니다.
+    UserData.setUserName(userData['user_name'].toString());
+    UserData.setUserId(userData['id'].toString());
+    UserData.setUserEmail(userData['user_email'].toString());
+    UserData.setUserImage(userData['user_image'].toString());
+    UserData.setUserRole(userData['role'].toString());
+    UserData.setUserLike(userData['user_like'].toString());
+    UserData.setUserIntro(userData['user_intro'].toString());
+    UserData.setUserWrite(userData['user_write'].toString());
+    UserData.CallNotify();
+    print('provider 저장 완료');
+  }
 
   int _selectedIndex = 0;
   Color color = Colors.white;

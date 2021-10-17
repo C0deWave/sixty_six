@@ -4,8 +4,9 @@ import 'package:image_picker/image_picker.dart';
 
 class HttpToJson {
   static Future getData(String url) async {
-    Response response = await get(Uri.parse(url));
-    return jsonDecode(response.body);
+    final headers = {"Content-type": "application/json"};
+    Response response = await get(Uri.parse(url), headers: headers);
+    return jsonDecode(utf8.decode(response.bodyBytes));
   }
 
   static void testGetData(String url) async {

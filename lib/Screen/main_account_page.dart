@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sixty_six/Class/data_shared_preference.dart';
-import 'package:sixty_six/Class/location_api.dart';
+import 'package:sixty_six/Class/user_info_provider.dart';
 import 'package:sixty_six/Screen/login_page.dart';
 import 'package:sixty_six/Widget/edit_profile.dart';
 import 'package:sixty_six/constant.dart';
@@ -14,23 +15,13 @@ class MainAccountPage extends StatelessWidget {
     Image.network(
         'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
     Image.network(
-        'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
-    Image.network(
-        'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
-    Image.network(
-        'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
-    Image.network(
-        'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
-    Image.network(
-        'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
-    Image.network(
-        'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
-    Image.network(
-        'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
+        'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg')
   ];
 
   @override
   Widget build(BuildContext context) {
+    UserInfoProvider UserData = Provider.of<UserInfoProvider>(context);
+
     return SafeArea(
       child: Column(
         children: [
@@ -60,8 +51,9 @@ class MainAccountPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                          image: NetworkImage(
-                              'https://googleflutter.com/sample_image.jpg'),
+                          image: NetworkImage(UserData.getUserImage() != 'null'
+                              ? UserData.getUserImage()
+                              : 'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg'),
                           fit: BoxFit.fill),
                     ),
                   ),
@@ -71,7 +63,9 @@ class MainAccountPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     child: Text(
-                      '아이디',
+                      UserData.getUserName() != 'null'
+                          ? UserData.getUserName()
+                          : "아이디",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
@@ -82,7 +76,9 @@ class MainAccountPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     child: Text(
-                      '안녕하세요 테스트용 텍스트 입니다. 모두 힘찬 하루 화이팅!!!!!!',
+                      UserData.getUserIntro() == "null"
+                          ? "자기소개를 설정해 주세요!"
+                          : UserData.getUserIntro(),
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),

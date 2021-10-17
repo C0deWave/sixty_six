@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sixty_six/Class/data_shared_preference.dart';
+import 'package:sixty_six/Class/http_to_json.dart';
 import 'package:sixty_six/Class/oauth_login.dart';
+import 'package:sixty_six/Class/user_info_provider.dart';
 import '../Widget/sign_in_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-
 import 'main_nevigation_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -78,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                 print('구글 버튼클릭');
                 var data = await oauthLogin.googleLogin();
                 SharedPreferenceData.setUserData("userToken", data);
+                //TODO : 나중에 로그인 개선 되면 여기에 ID 할당 내용 추가하기
                 goMainPage();
               },
             ),
@@ -93,8 +96,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void goMainPage() {
+    UserInfoProvider UserData =
+        Provider.of<UserInfoProvider>(context, listen: false);
     Navigator.pop(context);
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MainPage()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainPage(
+                  UserData: UserData,
+                )));
   }
 }
