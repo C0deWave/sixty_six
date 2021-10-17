@@ -18,26 +18,33 @@ class _MainPage extends State<MainPage> {
   ];
 
   int _selectedIndex = 0;
-  Color color = Colors.lightGreen;
+  Color color = Colors.white;
   @override
   Widget build(BuildContext context) {
+    var MyBottomNavigationBar = BottomNavigationBar(
+      iconSize: 20,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: color,
+      selectedItemColor: Colors.amber,
+      unselectedItemColor: Colors.grey,
+      selectedFontSize: 10,
+      unselectedFontSize: 10,
+      selectedLabelStyle: TextStyle(color: Colors.amber),
+      // 라벨을 전부 보이지 않게 한다.
+      // showSelectedLabels: false,
+      // showUnselectedLabels: false,
+      currentIndex: _selectedIndex, //현재 선택된 Index
+      onTap: (int index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      items: itemList,
+    );
+
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: color,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(.60),
-        selectedFontSize: 12,
-        unselectedFontSize: 10,
-        currentIndex: _selectedIndex, //현재 선택된 Index
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-            color = itemList[index].backgroundColor ?? Colors.grey;
-          });
-        },
-        items: itemList,
-      ),
+      bottomNavigationBar: SizedBox(height: 51, child: MyBottomNavigationBar),
+      // bottomNavigationBar: MyBottomNavigationBar,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -47,22 +54,22 @@ class _MainPage extends State<MainPage> {
   List<BottomNavigationBarItem> itemList = const [
     BottomNavigationBarItem(
       label: '내주변',
-      backgroundColor: Colors.lightGreen,
+      backgroundColor: Colors.white,
       icon: Icon(Icons.location_on),
     ),
     BottomNavigationBarItem(
       label: '내게시글',
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Colors.white,
       icon: Icon(Icons.account_balance_wallet),
     ),
     BottomNavigationBarItem(
       label: '방문록',
-      backgroundColor: Colors.purple,
+      backgroundColor: Colors.white,
       icon: Icon(Icons.home),
     ),
     BottomNavigationBarItem(
       label: '내계정',
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.white,
       icon: Icon(Icons.account_circle),
     ),
   ];
