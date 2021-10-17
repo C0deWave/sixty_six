@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+
 class JsonForm {
   //TODO : 나중에 나오는 api 양식 추가 및 uri 추가하기
   static String PostJson() {

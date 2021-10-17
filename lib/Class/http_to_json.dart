@@ -14,7 +14,7 @@ class HttpToJson {
     print(response.body);
   }
 
-  static Future<void> makePostRequest(String customUrl, String json) async {
+  static Future makePostRequest(String customUrl, String json) async {
     final url = Uri.parse(customUrl);
     final headers = {"Content-type": "application/json"};
     final response = await post(url, headers: headers, body: json);
@@ -34,7 +34,7 @@ class HttpToJson {
     return result['documents'][0]['address']['address_name'].toString();
   }
 
-  static Future<void> makePutRequest(String customUrl, String json) async {
+  static Future makePutRequest(String customUrl, String json) async {
     final url = Uri.parse(customUrl);
     final headers = {"Content-type": "application/json"};
     final response = await put(url, headers: headers, body: json);
@@ -43,14 +43,14 @@ class HttpToJson {
     return jsonDecode(response.body);
   }
 
-  static Future<void> makeDeleteRequest(String customUrl) async {
+  static Future makeDeleteRequest(String customUrl) async {
     final url = Uri.parse(customUrl);
     final response = await delete(url);
     print('Status code: ${response.statusCode}');
     print('Body: ${response.body}');
   }
 
-  static Future<void> makeImagePostRequest(
+  static Future makeMultiImagePostRequest(
       String customUrl, List<XFile> imageList) async {
     final url = Uri.parse(customUrl);
     var request = MultipartRequest("POST", url);
@@ -66,6 +66,32 @@ class HttpToJson {
     var response = await Response.fromStream(requested);
     print('Status code: ${response.statusCode}');
     print('Stream: ${(response.body)}');
+    return jsonDecode(response.body);
+  }
+
+  static Future makeSingleImagePostRequest(
+      String customUrl, XFile imageData) async {
+    final url = Uri.parse(customUrl);
+    var request = MultipartRequest("POST", url);
+    print('1');
+    request.fields['code'] = 'user';
+    request.files.add(await MultipartFile.fromPath(
+      'image',
+      imageData.path,
+    ));
+
+    var requested = await request.send();
+    var response = await Response.fromStream(requested);
+    print('Status code: ${response.statusCode}');
+    print('Stream: ${(response.body)}');
+    return response.body.toString();
+  }
+
+  static Future makeImagePostRequest(String customUrl, String bodyData) async {
+    final url = Uri.parse(customUrl);
+    final headers = {"Content-type": "application/json"};
+    final response = await post(url, headers: headers, body: bodyData);
+
     return jsonDecode(response.body);
   }
 }

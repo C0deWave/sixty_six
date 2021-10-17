@@ -98,8 +98,15 @@ class MainAccountPage extends StatelessWidget {
                           builder: (context) => Container(
                               height: MediaQuery.of(context).size.height - 40,
                               child: EditUserProfile(
-                                userImageUrl: "",
-                                intro: "",
+                                name: UserData.getUserName() != 'null'
+                                    ? UserData.getUserName()
+                                    : 'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg',
+                                userImageUrl: UserData.getUserImage() != 'null'
+                                    ? UserData.getUserImage()
+                                    : 'https://pbs.twimg.com/profile_images/1193899336398073856/mzTWz7DN.jpg',
+                                intro: UserData.getUserIntro() == "null"
+                                    ? "자기소개를 설정해 주세요!"
+                                    : UserData.getUserIntro(),
                               )));
                     },
                     child: Text('프로필 편집'),

@@ -59,11 +59,11 @@ class _MainPage extends State<MainPage> {
       iconSize: 20,
       type: BottomNavigationBarType.fixed,
       backgroundColor: color,
-      selectedItemColor: Colors.amber,
+      selectedItemColor: Colors.orange,
       unselectedItemColor: Colors.grey,
       selectedFontSize: 10,
       unselectedFontSize: 10,
-      selectedLabelStyle: TextStyle(color: Colors.amber),
+      selectedLabelStyle: TextStyle(color: Colors.orange),
       // 라벨을 전부 보이지 않게 한다.
       // showSelectedLabels: false,
       // showUnselectedLabels: false,
