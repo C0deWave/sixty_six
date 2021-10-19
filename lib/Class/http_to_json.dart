@@ -69,8 +69,8 @@ class HttpToJson {
     return jsonDecode(response.body);
   }
 
-  static Future makeSingleImagePostRequest(
-      String customUrl, XFile imageData) async {
+  static Future<String> makeSingleImagePostRequest(
+      String customUrl, XFile imageData, void function(value)) async {
     final url = Uri.parse(customUrl);
     var request = MultipartRequest("POST", url);
     print('1');
@@ -80,11 +80,17 @@ class HttpToJson {
       imageData.path,
     ));
 
-    var requested = await request.send();
-    var response = await Response.fromStream(requested);
-    print('Status code: ${response.statusCode}');
-    print('Stream: ${(response.body)}');
-    return response.body.toString();
+    // send
+    var response = await request.send();
+    print(response.statusCode);
+
+    // listen for response
+    await response.stream.transform(utf8.decoder).listen((value) {
+      print('함수 호출');
+      print(value.substring(2, value.length - 2));
+      function(value.substring(2, value.length - 2));
+    });
+    return "1";
   }
 
   static Future makeImagePostRequest(String customUrl, String bodyData) async {

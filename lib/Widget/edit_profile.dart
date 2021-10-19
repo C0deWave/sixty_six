@@ -39,33 +39,37 @@ class _EditUserProfileState extends State<EditUserProfile> {
         Provider.of<UserInfoProvider>(context, listen: false);
     String dataUrl;
 
-    Future imageUpload(var imageData) async {
-      var tempdata = await HttpToJson.makeSingleImagePostRequest(
-              "http://ec2-3-37-132-137"
-              ".ap-northeast-2.compute.amazonaws"
-              ".com:8080/sixtysix/user/image/upload",
-              imageData)
-          .toString();
-      print(tempdata);
-      return tempdata;
+    Future imageUpload(var imageData, void function(String data)) async {
+      await HttpToJson.makeSingleImagePostRequest(
+          "http://ec2-3-37-132-137"
+          ".ap-northeast-2.compute.amazonaws"
+          ".com:8080/sixtysix/user/image/upload",
+          imageData, (value) {
+        function(value);
+      });
+
+      return "1";
     }
 
-    Future changeUserData(String userImageUri) async {
+    //TODO : 계정정보 변경되는지 확인하기
+    Future<String> changeUserData(String userImageUri) async {
+      print('유저 데이터를 변경합니다.');
       // if (pickedImage != null) {
       // /user/update/admin/{id}
+      print(userImageUri);
       String url = "http://ec2-3-37-132-137"
           ".ap-northeast-2.compute.amazonaws"
           ".com:8080/sixtysix/user/update/user/${UserData.getUserId()}";
-      var tempdata = await HttpToJson.makePutRequest(
+      print(url);
+      await HttpToJson.makePutRequest(
               url,
               JsonForm.UpdateUserJson(
                   user_image: userImageUri,
                   user_intro: _textController.text,
-                  user_name: "김사랑"))
+                  user_name: _nameTextController.text))
           .toString();
       print('계정정보 변경 완료');
-      return tempdata;
-      // }
+      return "1";
     }
 
     return Scaffold(
@@ -132,8 +136,13 @@ class _EditUserProfileState extends State<EditUserProfile> {
               TextButton(
                   onPressed: () async {
                     print('계정정보 저장');
-                    dataUrl = await imageUpload(pickedImage);
-                    changeUserData(dataUrl.substring(2, 2));
+                    dataUrl = await imageUpload(pickedImage, (value) {
+                      print('유저 데이터 업데이트');
+                      print(value);
+                      changeUserData(value);
+                    });
+                    print("이미지 업로드 완료");
+                    // changeUserData(dataUrl.substring(2, 2));
                     //changeProviderData();
                     //Navigator.pop(context);
                   },
