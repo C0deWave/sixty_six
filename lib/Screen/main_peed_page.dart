@@ -64,8 +64,6 @@ class _MainPeedPageState extends State<MainPeedPage> {
               enablePullDown: true,
               onRefresh: () async {
                 //TODO:새로고침 기능이다. 글 불러오기
-                //테스트용
-                //httpToJson.makeGetRequest('');
                 // 시간 확인 테스트
                 DateTime now = DateTime.now();
                 String formattedDate =

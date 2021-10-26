@@ -54,10 +54,13 @@ class _MainMyWriitePageState extends State<MainMyWriitePage> {
               ? ExistWriteData(
                   isBeforeWriten: isBeforeWriten,
                   showFab: () => setState(() {
-                    isFabVisible = true;
-                  }),
+                        isFabVisible = true;
+                      }),
                   imageList: imageList,
-                )
+                  changeWritePage: () => setState(() {
+                        print('사진 선택전 페이지로 이동합니다.');
+                        isUserWritePage = false;
+                      }))
               //글을 안 쓴 경우 화면
               : NotExistWriteData(
                   changeWriteModeFunction: () => setState(() {
